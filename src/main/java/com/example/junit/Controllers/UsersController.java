@@ -18,7 +18,7 @@ public class UsersController {
     }
 
     @GetMapping
-    public User getUserById(int id){
+    public User getUserById(@RequestParam int id){
         return usersService.getById(id);
     }
 
@@ -28,20 +28,21 @@ public class UsersController {
     }
 
     @PutMapping
-    public User putUser(@RequestBody User user, @RequestParam int id){
+    public User putUser(@ModelAttribute User user, @RequestParam int id){
         return  usersService.putUser(id, user);
     }
 
     @PostMapping
     public User saveUser(@ModelAttribute User user){
         User newUser = new User();
+        newUser.setId(user.getId());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(user.getPassword());
         return usersService.saveUser(newUser);
     }
 
     @DeleteMapping
-    public int deleteUser(@RequestParam int id){
-        return usersService.deleteUser(id);
+    public void deleteUser(@RequestParam int id){
+        usersService.deleteUser(id);
     }
 }

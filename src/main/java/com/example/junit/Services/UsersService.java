@@ -27,14 +27,15 @@ public class UsersService {
     public User putUser(int id, User user){
         User oldUser = usersRepository.findById(id).orElse(null);
         assert oldUser != null;
-        oldUser = user;
+        oldUser.setId(user.getId());
+        oldUser.setUsername(user.getUsername());
+        oldUser.setPassword(user.getPassword());
         usersRepository.save(oldUser);
         return oldUser;
     }
 
-    public int deleteUser(int id){
+    public void deleteUser(int id){
         usersRepository.deleteById(id);
-        return id;
     }
 
     public User saveUser(User user){
