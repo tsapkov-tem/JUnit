@@ -27,7 +27,6 @@ public class UsersService {
     public User putUser(int id, User user){
         User oldUser = usersRepository.findById(id).orElse(null);
         assert oldUser != null;
-        oldUser.setId(user.getId());
         oldUser.setUsername(user.getUsername());
         oldUser.setPassword(user.getPassword());
         usersRepository.save(oldUser);
